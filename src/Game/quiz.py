@@ -1,14 +1,10 @@
-from .ChatGPT import ChatGPT
+from ai_chatbot import AIChatbot
 
 
-class Quiz(ChatGPT):
-    # aw
-    def startQuestion(self):
-        return self.talk("出題してください。")
-
-    # da
-    def __init__(self, apikey):
-        content = """
+class Quiz(AIChatbot):
+    # system初期化
+    def __init__(self, api_key, ai_model=None):
+        system_content = """
 ## ゲームのルール
 
 1. 出題者は「答え」を用意して、途中で変えることはできません。
@@ -28,4 +24,11 @@ class Quiz(ChatGPT):
 あなたが新しい問題を作成し、出題者として振る舞ってください。私は参加者としてあなたに質問します。それでは、ゲームを始めましょう！
         """
 
-        super().__init__(apikey, content)
+        super().__init__(
+            api_key=api_key, system_content=system_content, ai_model=ai_model
+        )
+
+    # 問題の初期化
+    def start(self):
+        self.chat_history = []
+        return self.talk("出題してください。")
