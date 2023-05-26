@@ -1,6 +1,5 @@
-import pytest
 from Game.quiz import Quiz
-from lib.get_env import get as env
+from lib.get_env import env
 
 
 class TestCreateQuiz:
