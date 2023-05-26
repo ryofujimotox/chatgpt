@@ -1,15 +1,9 @@
+from typing import List, Optional
 from ai_chatbot import AIChatbot
 
 
 class Quiz(AIChatbot):
-    def __init__(self, api_key, ai_model=None):
-        # system初期化
-        super().__init__(api_key=api_key, ai_model=ai_model)
-        self.set_system()
-
-    def set_system(self):
-        # セットアップ
-        system_content = """
+    game_rule = """
 ## ゲームのルール
 
 1. 出題者は「答え」を用意して、途中で変えることはできません。
@@ -27,13 +21,34 @@ class Quiz(AIChatbot):
 
 ## ゲームの開始
 あなたが新しい問題を作成し、出題者として振る舞ってください。私は参加者としてあなたに質問します。それでは、ゲームを始めましょう！
-        """
-        super().set_system(system_content)
+"""
 
-    def start(self):
+    def __init__(self, api_key: str, ai_model: Optional[str] = None) -> None:
+        """
+        QuizGameクラスの初期化メソッド。
+
+        :param api_key: AI ChatbotのAPIキー
+        :param ai_model: AIモデル名（任意）
+        """
+        super().__init__(api_key=api_key, ai_model=ai_model)
+        self.__setup_game_rules()
+
+    def start(self) -> bool:
+        """
+        ゲームをスタートするメソッド。ゲームの初期化を行い、セットアップメッセージを送信します。
+
+        :return: セットアップが完了したかどうかを示す真偽値
+        """
         # 問題の初期化
-        self.chat_history = []
-        self.set_system()
+        self.chat_history: List[str] = []
+        self.__setup_game_rules()
 
         response = self.talk("用意ができたら、「setup」とだけ返事してください。")
         return "setup" in response
+
+    def __setup_game_rules(self) -> None:
+        """
+        ゲームのルールを設定するメソッド。
+        """
+
+        super().setup_system_rules(self.game_rule)
