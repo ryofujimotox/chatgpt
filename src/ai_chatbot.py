@@ -5,6 +5,7 @@ from typing import Optional, List, Dict
 class AIChatbot:
     chat_history: List[Dict[str, str]] = []  # チャット設定を記録するリスト
     ai_model: str = "gpt-3.5-turbo"  # デフォルトのAIモデルは 'gpt-3.5-turbo'
+    system_content: str = None
 
     def __init__(
         self,
@@ -26,22 +27,23 @@ class AIChatbot:
         self.__set_api_key(api_key)
 
         if system_content:
-            self.setup_system_rules(system_content)
+            self.system_content = system_content
 
         if ai_model:
             self.ai_model = ai_model
 
-    def setup_system_rules(self, system_content: str) -> None:
+        self.initialize_system()
+
+    def initialize_system(self) -> None:
         """
         AIアシスタントの設定などをチャット設定に追加するメソッド。
-
-        Parameters:
-            system_content (str): チャット設定に追加するシステムコンテンツ
 
         Returns:
             None
         """
-        self.__add_system_content(system_content)
+
+        self.chat_history: List[str] = []
+        self.__add_system_content()
 
     def talk(self, user_message: str) -> str:
         """
@@ -76,17 +78,17 @@ class AIChatbot:
         """
         openai.api_key = api_key
 
-    def __add_system_content(self, system_content: str) -> None:
+    def __add_system_content(self) -> None:
         """
         AIアシスタントの設定などをチャット設定に追加するメソッド。
-
-        Parameters:
-            system_content (str): チャット設定に追加するシステムコンテンツ
 
         Returns:
             None
         """
-        self.chat_history.append({"role": "system", "content": system_content})
+        if not self.system_content:
+            return
+
+        self.chat_history.append({"role": "system", "content": self.system_content})
 
     def __add_user_message(self, user_message: str) -> None:
         """

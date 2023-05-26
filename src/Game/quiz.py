@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 from ai_chatbot import AIChatbot
 
 
@@ -30,8 +30,9 @@ class Quiz(AIChatbot):
         :param api_key: AI ChatbotのAPIキー
         :param ai_model: AIモデル名（任意）
         """
-        super().__init__(api_key=api_key, ai_model=ai_model)
-        self.__setup_game_rules()
+        super().__init__(
+            api_key=api_key, ai_model=ai_model, system_content=self.game_rule
+        )
 
     def start(self) -> bool:
         """
@@ -40,15 +41,7 @@ class Quiz(AIChatbot):
         :return: セットアップが完了したかどうかを示す真偽値
         """
         # 問題の初期化
-        self.chat_history: List[str] = []
-        self.__setup_game_rules()
+        self.initialize_system()
 
         response = self.talk("用意ができたら、「setup」とだけ返事してください。")
         return "setup" in response
-
-    def __setup_game_rules(self) -> None:
-        """
-        ゲームのルールを設定するメソッド。
-        """
-
-        super().setup_system_rules(self.game_rule)
