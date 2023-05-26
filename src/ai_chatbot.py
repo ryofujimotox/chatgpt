@@ -2,7 +2,7 @@ import openai
 
 
 class AIChatbot:
-    chat_history = []  # チャットの履歴を記録するリスト
+    chat_history = []  # チャット設定を記録するリスト
     ai_model = "gpt-3.5-turbo"  # デフォルトのAIモデルは 'gpt-3.5-turbo'
 
     def __init__(self, api_key, system_content=None, ai_model=None):
@@ -20,7 +20,7 @@ class AIChatbot:
         self.__add_system_content(system_content)
 
     def talk(self, user_message):
-        # ユーザーメッセージをチャット履歴に追加し、AIからのレスポンスを取得するメソッド
+        # ユーザーメッセージをチャット設定に追加し、AIからのレスポンスを取得するメソッド
         self.__add_user_message(user_message)  # ユーザーメッセージを追加
 
         ai_response = openai.ChatCompletion.create(
@@ -37,13 +37,13 @@ class AIChatbot:
         openai.api_key = api_key
 
     def __add_system_content(self, system_content):
-        # システムメッセージをチャット履歴に追加するメソッド
+        # AIアシスタントの設定などをチャット設定に追加するメソッド
         self.chat_history.append({"role": "system", "content": system_content})
 
     def __add_user_message(self, user_message):
-        # ユーザーメッセージをチャット履歴に追加するメソッド
+        # ユーザーメッセージをチャット設定に追加するメソッド
         self.chat_history.append({"role": "user", "content": user_message})
 
     def __add_ai_message(self, ai_message):
-        # AIアシスタントのメッセージをチャット履歴に追加するメソッド
+        # AIアシスタントのメッセージをチャット設定に追加するメソッド
         self.chat_history.append({"role": "assistant", "content": ai_message})
