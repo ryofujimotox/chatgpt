@@ -4,8 +4,7 @@ from lib.get_env import get as env
 
 
 class TestCreateQuiz:
-    # 接続後正しい計算ができているか
-    def test__接続後正しい計算ができているか(self):
+    def test__正常系_用意できているか(self):
         if env("TEST_QUIZ") == "0":
             return
 
