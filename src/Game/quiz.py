@@ -34,4 +34,6 @@ class Quiz(AIChatbot):
         # 問題の初期化
         self.chat_history = []
         self.set_system()
-        return self.talk("用意ができたら、「setup」とだけ返事してください。")
+
+        response = self.talk("用意ができたら、「setup」とだけ返事してください。")
+        return "setup" in response

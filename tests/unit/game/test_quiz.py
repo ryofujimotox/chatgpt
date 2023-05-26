@@ -10,5 +10,4 @@ class TestCreateQuiz:
 
         apikey = env("OPENAI_API_KEY")
         Chat = Quiz(apikey)
-        response = Chat.start()
-        assert response == "setup"
+        assert Chat.start()
