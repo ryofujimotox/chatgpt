@@ -10,10 +10,14 @@ class AIChatbot:
         self.__set_api_key(api_key)
 
         if system_content:
-            self.__add_system_content(system_content)
+            self.set_system(system_content)
 
         if ai_model:
             self.ai_model = ai_model
+
+    def set_system(self, system_content):
+        # AIアシスタントの設定などをチャット設定に追加するメソッド
+        self.__add_system_content(system_content)
 
     def talk(self, user_message):
         # ユーザーメッセージをチャット履歴に追加し、AIからのレスポンスを取得するメソッド
