@@ -10,6 +10,4 @@ class TestCreateQuiz:
         
         Chat = Quiz(apikey)
         response = Chat.start()
-        return
-    
-        assert response == "2"
+        assert response == "setup"

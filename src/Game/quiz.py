@@ -2,8 +2,13 @@ from ai_chatbot import AIChatbot
 
 
 class Quiz(AIChatbot):
-    # system初期化
     def __init__(self, api_key, ai_model=None):
+        # system初期化
+        super().__init__(api_key=api_key, ai_model=ai_model)
+        self.set_system()
+
+    def set_system(self):
+        # セットアップ
         system_content = """
 ## ゲームのルール
 
@@ -23,12 +28,10 @@ class Quiz(AIChatbot):
 ## ゲームの開始
 あなたが新しい問題を作成し、出題者として振る舞ってください。私は参加者としてあなたに質問します。それでは、ゲームを始めましょう！
         """
+        super().set_system(system_content)
 
-        super().__init__(
-            api_key=api_key, system_content=system_content, ai_model=ai_model
-        )
-
-    # 問題の初期化
     def start(self):
+        # 問題の初期化
         self.chat_history = []
-        return self.talk("出題してください。")
+        self.set_system()
+        return self.talk("用意ができたら、「setup」とだけ返事してください。")
