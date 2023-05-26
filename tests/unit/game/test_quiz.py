@@ -1,14 +1,14 @@
 import pytest
 from Game.quiz import Quiz
+from lib.get_env import get as env
 
 
 class TestCreateQuiz:
-    apikey = "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"
-
-    # todo
     # 接続後正しい計算ができているか
     def test__接続後正しい計算ができているか(self):
-        Chat = Quiz(self.apikey)
+        apikey = env("OPENAI_API_KEY")
+        
+        Chat = Quiz(apikey)
         response = Chat.start()
         return
     
