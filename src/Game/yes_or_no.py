@@ -3,8 +3,9 @@ from ai_chatbot import AIChatbot
 
 
 class YesOrNo(AIChatbot):
-    game_rule = """Simulate statistical data.
-Format: Number(closer to 100 for more 'yes'; closer to 0 for more 'no')-Justification(20 characters)"""
+    game_rule = """Score the accuracy of a question regarding a specific matter. 
+Accuracy score 0~100, 10-word description.
+Format: ScoreNumber - Description"""
 
     answer: str = None
 
