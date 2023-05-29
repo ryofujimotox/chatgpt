@@ -9,4 +9,6 @@ class TestCreateYesOrNo:
 
         apikey = env("OPENAI_API_KEY")
         Chat = YesOrNo(apikey, "東京タワー")
-        assert Chat.talk("赤いですか") == 1
+
+        assert Chat.talk("赤い?")["score"] >= 50
+        assert Chat.talk("青い?")["score"] <= 10

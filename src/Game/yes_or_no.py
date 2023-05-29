@@ -28,20 +28,31 @@ Format: Number(closer to 100 for more 'yes'; closer to 0 for more 'no')-Justific
         self.answer = answer
         self.initialize_system()
 
-    def talk(self, user_message: str) -> bool:
+    def talk(self, message: str) -> dict:
         """
         ゲームをスタートするメソッド。ゲームの初期化を行い、セットアップメッセージを送信します。
 
         Parameters:
-            user_message (str): ユーザーからのメッセージ
+            message (str): ユーザーからのメッセージ
 
         :return: セットアップが完了したかどうかを示す真偽値
         """
 
-        response = super().talk(self.answer + "は、" + user_message)
-        splited = self.split(response)
-        return splited
+        response = super().talk("Question: " + self.answer + "は、" + message)
+        data = self.__parse_response(response)
+        return data
 
-    def split(self, response: str):
-        data = response.split("-")
+    def __parse_response(self, response: str) -> dict:
+        """
+        応答を解析してデータを返すメソッド。
+
+        Parameters:
+            response (str): 応答の文字列
+
+        Returns:
+            dict: 解析されたデータ
+        """
+
+        data = response.split(" - ")
+        data = {"score": int(data[0]), "description": data[1]}
         return data
