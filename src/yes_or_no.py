@@ -1,6 +1,6 @@
 from typing import Optional
 from ai_chatbot import AIChatbot
-from .hints import Hints
+from hints import Hints
 
 
 class YesOrNo(AIChatbot):

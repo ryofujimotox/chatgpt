@@ -1,4 +1,4 @@
-from Game.quiz import Quiz
+from quiz import Quiz
 from lib.get_env import env
 
 

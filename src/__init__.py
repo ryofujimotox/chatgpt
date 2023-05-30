@@ -1,4 +1,6 @@
 from .ai_chatbot import *
-from .Game.quiz import *
+from .quiz import *
+from .hints import *
+from .yes_or_no import *
 
 __version__ = "0.1.0"

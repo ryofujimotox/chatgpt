@@ -1,4 +1,4 @@
-from Game.yes_or_no import YesOrNo
+from yes_or_no import YesOrNo
 from lib.get_env import env
 
 

@@ -1,4 +1,4 @@
-from Game.hints import Hints
+from hints import Hints
 from lib.get_env import env
 
 
