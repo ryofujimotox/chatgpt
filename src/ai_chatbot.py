@@ -7,6 +7,8 @@ class AIChatbot:
     ai_model: str = "gpt-3.5-turbo"  # デフォルトのAIモデルは 'gpt-3.5-turbo'
     system_content: str = None
 
+    api_key: str = None
+
     def __init__(
         self,
         api_key: str,
@@ -26,15 +28,12 @@ class AIChatbot:
         """
         self.__set_api_key(api_key)
 
-        if system_content:
-            self.system_content = system_content
-
         if ai_model:
             self.ai_model = ai_model
 
-        self.initialize_system()
+        self.initialize_system(system_content)
 
-    def initialize_system(self) -> None:
+    def initialize_system(self, system_content: str = None) -> None:
         """
         AIアシスタントの設定などをチャット設定に追加するメソッド。
 
@@ -43,6 +42,10 @@ class AIChatbot:
         """
 
         self.chat_history: List[str] = []
+
+        if system_content:
+            self.system_content = system_content
+
         self.__add_system_content()
 
     def talk(self, user_message: str) -> str:
@@ -76,6 +79,7 @@ class AIChatbot:
         Returns:
             None
         """
+        self.api_key = api_key
         openai.api_key = api_key
 
     def __add_system_content(self) -> None:

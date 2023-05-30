@@ -27,7 +27,10 @@ Format: ScoreNumber - Description"""
     def restart(self, answer: str):
         # 問題の初期化
         self.answer = answer
-        self.initialize_system()
+
+
+        # 初期化
+        self.initialize_system(self.game_rule)
 
     def talk(self, message: str) -> dict:
         """

@@ -41,7 +41,7 @@ class Quiz(AIChatbot):
         :return: セットアップが完了したかどうかを示す真偽値
         """
         # 問題の初期化
-        self.initialize_system()
+        self.initialize_system(self.game_rule)
 
         response = self.talk("用意ができたら、「setup」とだけ返事してください。")
         return "setup" in response
