@@ -1,5 +1,6 @@
 from typing import Optional
 from ai_chatbot import AIChatbot
+from .hints import Hints
 
 
 class YesOrNo(AIChatbot):
@@ -8,6 +9,8 @@ Accuracy score 0~100, 10-word description.
 Format: ScoreNumber - Description"""
 
     answer: str = None
+
+    hints: Hints = None
 
     def __init__(
         self, api_key: str, answer: str, ai_model: Optional[str] = None
@@ -28,9 +31,17 @@ Format: ScoreNumber - Description"""
         # 問題の初期化
         self.answer = answer
 
+        # ヒント
+        self.hints = None
 
         # 初期化
         self.initialize_system(self.game_rule)
+
+    def get_hinsts(self):
+        if self.hints is None:
+            self.hints = Hints(self.api_key, self.answer)
+
+        return self.hints.get()
 
     def talk(self, message: str) -> dict:
         """
