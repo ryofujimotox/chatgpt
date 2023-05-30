@@ -1,5 +1,5 @@
 from typing import Optional, List
-from ai_chatbot import AIChatbot
+from chatgpt.src.ai_chatbot import AIChatbot
 import re
 
 
