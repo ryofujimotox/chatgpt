@@ -1,5 +1,5 @@
-from quiz import Quiz
-from lib.get_env import env
+from chatgpt.src.quiz import Quiz
+from chatgpt.tests.lib.get_env import env
 
 
 class TestCreateQuiz:

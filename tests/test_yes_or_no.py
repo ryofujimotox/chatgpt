@@ -1,5 +1,5 @@
-from yes_or_no import YesOrNo
-from lib.get_env import env
+from chatgpt.src.yes_or_no import YesOrNo
+from chatgpt.tests.lib.get_env import env
 
 
 class TestCreateYesOrNo:

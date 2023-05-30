@@ -1,5 +1,5 @@
-from hints import Hints
-from lib.get_env import env
+from chatgpt.src.hints import Hints
+from chatgpt.tests.lib.get_env import env
 
 
 class TestCreateHints:

@@ -1,5 +1,5 @@
 from ai_chatbot import AIChatbot
-from lib.get_env import env
+from .lib.get_env import env
 
 
 class TestCreateQuiz:
