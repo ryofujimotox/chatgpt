@@ -1,4 +1,4 @@
-from ai_chatbot import AIChatbot
+from chatgpt.src.ai_chatbot import AIChatbot
 from .lib.get_env import env
 
 
