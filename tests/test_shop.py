@@ -1,7 +1,8 @@
 from chatgpt.src.shop import Shop
-from chatgpt.tests.lib.get_env import env
+import pytest
 
 
+@pytest.mark.check_env("TEST_SHOP")
 class TestCreateShop:
     shopname = """BBQ restaurant 'GOLD BUTCHER'"""
     menu = """番号,名前,価格,おすすめかどうか
@@ -11,11 +12,9 @@ class TestCreateShop:
 4,コーラ,100,false
 5,オレンジジュース,200,false"""
 
-    def test__正常系_用意できているか(self):
-        apikey = env("OPENAI_API_KEY")
-
+    def test__正常系_用意できているか(self, api_key):
         #
-        Chat = Shop(apikey, self.shopname, self.menu)
+        Chat = Shop(api_key, self.shopname, self.menu)
         talked = Chat.talk("おすすめは？")
         if talked is None:
             assert talked == "取得できなかった"
@@ -23,11 +22,9 @@ class TestCreateShop:
 
         assert ("牛タン" in talked["waiter_speak"]) or ("柔らかい肉" in talked["waiter_speak"])
 
-    def test__正常系_用意できているか2(self):
-        apikey = env("OPENAI_API_KEY")
-
+    def test__正常系_用意できているか2(self, api_key):
         #
-        Chat = Shop(apikey, self.shopname, self.menu)
+        Chat = Shop(api_key, self.shopname, self.menu)
         talked = Chat.talk("コーラ1つと、牛タン2つ、上ロース1つください")
         if talked is None:
             assert talked == "取得できなかった"

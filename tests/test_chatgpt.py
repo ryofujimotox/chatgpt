@@ -1,13 +1,10 @@
 from chatgpt.src.ai_chatbot import AIChatbot
-from .lib.get_env import env
+import pytest
 
 
+@pytest.mark.check_env("TEST_CHAT")
 class TestCreateQuiz:
-    def test__正常系_正しい計算ができているか(self):
-        if env("TEST_CHAT") == "0":
-            return
-
-        apikey = env("OPENAI_API_KEY")
-        Chat = AIChatbot(api_key=apikey)
+    def test__正常系_正しい計算ができているか(self, api_key):
+        Chat = AIChatbot(api_key=api_key)
         response = Chat.talk("1+1=")
         assert response == "2"

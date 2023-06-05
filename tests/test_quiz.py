@@ -1,12 +1,9 @@
 from chatgpt.src.quiz import Quiz
-from chatgpt.tests.lib.get_env import env
+import pytest
 
 
+@pytest.mark.check_env("TEST_QUIZ")
 class TestCreateQuiz:
-    def test__正常系_用意できているか(self):
-        if env("TEST_QUIZ") == "0":
-            return
-
-        apikey = env("OPENAI_API_KEY")
-        Chat = Quiz(apikey)
+    def test__正常系_用意できているか(self, api_key):
+        Chat = Quiz(api_key)
         assert Chat.start()
