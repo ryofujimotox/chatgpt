@@ -4,9 +4,8 @@ from chatgpt.src.hints import Hints
 
 
 class YesOrNo(AIChatbot):
-    game_rule = """Score the accuracy of a question regarding a specific matter. 
-Accuracy score 0~100, 10-word description.
-Format: ScoreNumber - Description"""
+    game_rule = """Grade the accuracy of the questions on a scale of 0-100.
+Format: {"score":0~100,"description":10-word in Japanese}"""
 
     answer: str = None
 

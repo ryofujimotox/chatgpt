@@ -6,17 +6,14 @@ import json
 class Shop(AIChatbot):
     def get_system_content(self, shop_name, menu):
         return f"""
-- Act as a Waiter at the {shop_name}
-- 客にメニュー番号は伝えないでください
+- Act as a Waiter at the {shop_name}.
+- Don't tell the customer the menu number.
 
-Always output values in the following format
+Format:
 {{
   "ordered_numbers":[Ordered menu numbers],
-  "waiter_speak": output your statement as a Waiter in Japanese
+  "waiters_reply": 10 tokens in Japanese
 }}
-Keys must be included.
-Delete information other than JSON.
-If there is no corresponding information, set to null.
 
 menu:
 {menu}
@@ -46,6 +43,6 @@ menu:
 
         # 結果を表示
         return {
-            "waiter_speak": data_dict["waiter_speak"],
+            "waiter_speak": data_dict["waiters_reply"],
             "ordered_numbers": data_dict["ordered_numbers"],
         }
